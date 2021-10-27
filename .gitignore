@@ -32,3 +32,6 @@ language_experiments/
 tests/out/
 .DS_Store
 .vscode
+# dont touch
+pyccg
+*.ml

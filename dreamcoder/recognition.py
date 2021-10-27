@@ -257,7 +257,7 @@ class ContextualGrammarNetwork_LowRank(nn.Module):
         """Takes as input BxinputDimensionality vector & B likelihood summaries;
         returns B-dimensional vector containing log likelihood of each summary"""
         use_cuda = xs.device.type == 'cuda'
-        
+
         B = xs.shape[0]
         G = len(self.grammar) + 1
         assert len(summaries) == B
@@ -821,6 +821,8 @@ class RecognitionModel(nn.Module):
         else:
             features = self._MLP(features).unsqueeze(0)
             
+            import pdb
+            pdb.set_trace()
             ll = self.grammarBuilder.batchedLogLikelihoods(features, [entry.program]).view(-1)
             return -ll, al
             
