@@ -820,9 +820,6 @@ class RecognitionModel(nn.Module):
             return - entry.program.logLikelihood(g), al
         else:
             features = self._MLP(features).unsqueeze(0)
-            
-            import pdb
-            pdb.set_trace()
             ll = self.grammarBuilder.batchedLogLikelihoods(features, [entry.program]).view(-1)
             return -ll, al
             
