@@ -307,9 +307,6 @@ class FragmentGrammar(object):
         bestGrammar = FragmentGrammar.fromGrammar(g0)
         oldJoint = bestGrammar.jointFrontiersMDL(frontiers, CPUs=1)
 
-        import pdb
-        pdb.set_trace()
-
         # "restricted frontiers" only contain the top K according to the best grammar
         def restrictFrontiers():
             return parallelMap(
@@ -386,6 +383,10 @@ class FragmentGrammar(object):
                 eprint(
                     "\t(<uses> in rewritten frontiers: %f)" %
                     (bestGrammar.expectedUses(frontiers).actualUses[concretePrimitive]))
+
+                import pdb
+                pdb.set_trace()
+                z = 1
         else:
             eprint("Skipping fragment proposals")
 
