@@ -53,5 +53,4 @@ singularity exec container.img python bin/tower.py -t 600 --pseudoCounts 30 \
 Also run some graph.py tests from the root of the repo:
 ```bash
 bash tests/integration/runtests.sh
-``` 
- 
+```
