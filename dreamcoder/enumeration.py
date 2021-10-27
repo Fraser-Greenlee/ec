@@ -27,16 +27,17 @@ def multicoreEnumeration(g, tasks, _=None,
      # everything that gets sent between processes will be dilled
     import dill
 
-    solvers = {"ocaml": solveForTask_ocaml,   
-               "pypy": solveForTask_pypy,   
-               "python": solveForTask_python}   
-    assert solver in solvers, "You must specify a valid solver. options are ocaml, pypy, or python." 
+    solvers = {"ocaml": solveForTask_ocaml,
+               "pypy": solveForTask_pypy,
+               "python": solveForTask_python
+    }
+    assert solver in solvers, "You must specify a valid solver. options are ocaml, pypy, or python."
 
     likelihoodModel = None
     if solver == 'pypy' or solver == 'python':
-      # Use an all or nothing likelihood model.
-      likelihoodModel = AllOrNothingLikelihoodModel(timeout=evaluationTimeout) 
-      
+        # Use an all or nothing likelihood model.
+        likelihoodModel = AllOrNothingLikelihoodModel(timeout=evaluationTimeout)
+
     solver = solvers[solver]
 
     if not isinstance(g, dict):
@@ -74,7 +75,7 @@ def multicoreEnumeration(g, tasks, _=None,
     stopwatches = {t: Stopwatch() for t in jobs}
 
     # Map from task to how many programs we enumerated for that task
-    taskToNumberOfPrograms = {t: 0 for t in tasks }
+    taskToNumberOfPrograms = {t: 0 for t in tasks}
 
     def numberOfHits(f):
         return sum(e.logLikelihood > -0.01 for e in f)
@@ -223,6 +224,7 @@ def multicoreEnumeration(g, tasks, _=None,
 
     return [frontiers[t] for t in tasks], bestSearchTime
 
+
 def wrapInThread(f):
     """
     Returns a function that is designed to be run in a thread/threadlike process.
@@ -236,14 +238,18 @@ def wrapInThread(f):
 
         try:
             r = f(*a, **k)
-            q.put(dill.dumps({"result": "success",
-                   "ID": ID,
-                   "value": r}))
+            q.put(dill.dumps({
+                "result": "success",
+                "ID": ID,
+                "value": r
+            }))
         except Exception as e:
-            q.put(dill.dumps({"result": "failure",
-                   "exception": e,
-                   "stacktrace": traceback.format_exc(),
-                   "ID": ID}))
+            q.put(dill.dumps({
+                "result": "failure",
+                "exception": e,
+                "stacktrace": traceback.format_exc(),
+                "ID": ID
+            }))
             return
     return _f
 
@@ -434,7 +440,7 @@ def enumerateForTasks(g, tasks, likelihoodModel, _=None,
                     success, likelihood = likelihoodModel.score(p, task)
                     if not success:
                         continue
-                        
+
                     dt = time() - starting + elapsedTime
                     priority = -(likelihood + prior)
                     hits[n].push(priority,

@@ -61,7 +61,7 @@ class Grammar(object):
                 continuationType = baseType("tower")
             else:
                 continuationType = None
-                
+
         self.__init__(state['logVariable'], state['productions'], continuationType=continuationType)
 
     @staticmethod

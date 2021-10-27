@@ -243,8 +243,12 @@ class FragmentGrammar(object):
                     entry.logLikelihood +
                     self.logLikelihood(
                         frontier.task.request,
-                        entry.program) for entry in frontier),
-                frontiers))
+                        entry.program
+                    ) for entry in frontier
+                ),
+                frontiers
+            )
+        )
 
     def __len__(self): return len(self.productions)
 
@@ -291,14 +295,20 @@ class FragmentGrammar(object):
             aic=1.0,
             structurePenalty=0.001,
             a=0,
-            CPUs=1):
-        _ = topk_use_only_likelihood # not used in python compressor
+            CPUs=1
+    ):
+        _ = topk_use_only_likelihood  # not used in python compressor
         originalFrontiers = frontiers
         frontiers = [frontier for frontier in frontiers if not frontier.empty]
         eprint("Inducing a grammar from", len(frontiers), "frontiers")
 
+        # TODO fras stopped reading here.
+
         bestGrammar = FragmentGrammar.fromGrammar(g0)
         oldJoint = bestGrammar.jointFrontiersMDL(frontiers, CPUs=1)
+
+        import pdb
+        pdb.set_trace()
 
         # "restricted frontiers" only contain the top K according to the best grammar
         def restrictFrontiers():

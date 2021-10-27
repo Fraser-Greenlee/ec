@@ -29,11 +29,12 @@ def induceGrammar(*args, **kwargs):
         original_tasks = {f.task.name: f.task for f in frontiers}
         frontiers = [Frontier(f.entries, Task(f.task.name,f.task.request,[]))
                      for f in frontiers ]
-        args = [g0,frontiers]
+        args = [g0, frontiers]
 
-    
     with timing("Induced a grammar"):
-        if backend == "pypy":
+        if backend == "python":
+            g, newFrontiers = pypyInduce(*args, **kwargs)
+        elif backend == "pypy":
             g, newFrontiers = callCompiled(pypyInduce, *args, **kwargs)
         elif backend == "rust":
             g, newFrontiers = rustInduce(*args, **kwargs)
@@ -88,10 +89,7 @@ def memorizeInduce(g, frontiers, **kwargs):
                              task=f.task)
                  for f in frontiers ]
     return newGrammar, newFrontiers
-    
-    
-        
-    
+
 
 def pypyInduce(*args, **kwargs):
     kwargs.pop('iteration')

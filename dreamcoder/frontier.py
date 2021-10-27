@@ -112,7 +112,7 @@ class Frontier(object):
         this = g.rescoreFrontier(self).normalize()
         ps = list(sorted(g.primitives, key=str))
         features = np.zeros(len(ps))
-        
+
         for j, p in enumerate(ps):
             for e in this:
                 w = math.exp(e.logPosterior)
@@ -120,7 +120,6 @@ class Frontier(object):
                                        for _, child in e.program.walk() )
             if not p.isInvented: features[j] *= 0.3
         return features
-            
 
     def removeZeroLikelihood(self):
         self.entries = [

@@ -300,19 +300,6 @@ def forkCallBack(x):
         raise e
 
 
-def callFork(f, *arguments, **kw):
-    """Forks a new process to execute the call. Blocks until the call completes."""
-    global FORKPARAMETERS
-
-    from multiprocessing import Pool
-
-    workers = Pool(1)
-    ys = workers.map(forkCallBack, [[f, arguments, kw]])
-    workers.terminate()
-    assert len(ys) == 1
-    return ys[0]
-
-
 PARALLELPROCESSDATA = None
 
 

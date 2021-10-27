@@ -251,8 +251,9 @@ def ecIterator(grammar, tasks,
     if not useDSL:
         for k in {"structurePenalty", "pseudoCounts", "aic"}:
             del parameters[k]
-    else: del parameters["useDSL"]
-    
+    else:
+        del parameters["useDSL"]
+
     # Uses `parameters` to construct the checkpoint path
     def checkpointPath(iteration, extra=""):
         parameters["iterations"] = iteration
@@ -364,8 +365,8 @@ def ecIterator(grammar, tasks,
         if useRecognitionModel: ECResult.clearRecognitionModel(path)
             
         sys.exit(0)
-    
-    
+
+
     for j in range(resume or 0, iterations):
         if storeTaskMetrics and rewriteTaskMetrics:
             eprint("Resetting task metrics for next iteration.")

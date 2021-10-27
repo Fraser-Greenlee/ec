@@ -813,6 +813,8 @@ class RecognitionModel(nn.Module):
 
         al = self.auxiliaryLoss(frontier, features if auxiliary else features.detach())
 
+        # TODO stopped reading here
+
         if not vectorized:
             g = self(features)
             return - entry.program.logLikelihood(g), al

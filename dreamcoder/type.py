@@ -135,7 +135,6 @@ class TypeVariable(Type):
         if self.v  not in mapping:
             mapping[self.v] = TypeConstructor(f"dummy_type_{len(mapping)}", [])
         return mapping[self.v]
-        
 
     def __eq__(self, other):
         return isinstance(other, TypeVariable) and self.v == other.v
@@ -241,6 +240,7 @@ class Context(object):
             "t%d ||> %s" % (k, v.apply(self)) for k, v in self.substitution))
 
     def __repr__(self): return str(self)
+
 
 class MutableContext(object):
     def __init__(self):

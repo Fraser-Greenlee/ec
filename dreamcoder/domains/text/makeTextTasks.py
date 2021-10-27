@@ -99,9 +99,6 @@ def makeTasks():
 
     problems = []
 
-    def toList(s): return [c for c in s]
-    # Converts strings into a list of characters depending on the type
-
     def preprocess(x):
         if isinstance(x, tuple):
             return tuple(preprocess(z) for z in x)
@@ -332,8 +329,9 @@ def loadPBETasks(directory="PBE_Strings_Track"):
                 else:
                     declarative = True
                     break
-        if declarative: continue
-        
+        if declarative:
+            continue
+
         examples = list({(tuple(xs), y) for xs, y in examples})
 
         task = Task(name, arrow(*[tstr] * (len(examples[0][0]) + 1)),
@@ -346,6 +344,7 @@ def loadPBETasks(directory="PBE_Strings_Track"):
 
     for p in tasks:
         guessConstantStrings(p)
+
     return tasks, cheatingTasks
 
 
