@@ -146,8 +146,8 @@ def isIntFunction(tp):
         return False
 
 try:
-    from dreamcoder.recognition import RecurrentFeatureExtractor
-    class LearnedFeatureExtractor(RecurrentFeatureExtractor):
+    from dreamcoder.recognition import TransformerFeatureExtractor
+    class LearnedFeatureExtractor(TransformerFeatureExtractor):
         H = 64
 
         special = None

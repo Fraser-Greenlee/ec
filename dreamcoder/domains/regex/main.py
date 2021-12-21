@@ -15,8 +15,8 @@ import pregex as pre
 import os
 
 try:
-    from dreamcoder.recognition import RecurrentFeatureExtractor, JSONFeatureExtractor
-    class LearnedFeatureExtractor(RecurrentFeatureExtractor):
+    from dreamcoder.recognition import TransformerFeatureExtractor, JSONFeatureExtractor
+    class LearnedFeatureExtractor(TransformerFeatureExtractor):
         H = 64
         special = 'regex'
 

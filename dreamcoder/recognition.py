@@ -1362,9 +1362,16 @@ class RecurrentFeatureExtractor(nn.Module):
                 if len(ys) == len(xss):
                     return Task("Helmholtz", tp, list(zip(xss, ys)))
             return None
-                
-            
-    
+
+
+class TransformerFeatureExtractor(RecurrentFeatureExtractor):
+    def __init__(self, *args, **kwargs):
+        super().__init__(self, *args, **kwargs)
+        self.model = t5_encoder()
+        self.H = self.model.config.d_model
+        self.bidirectional = False # TODO unsure
+
+
 class LowRank(nn.Module):
     """
     Module that outputs a rank R matrix of size m by n from input of size i.

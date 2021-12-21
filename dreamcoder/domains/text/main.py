@@ -33,7 +33,7 @@ class ConstantInstantiateVisitor(object):
 
 try:
     from dreamcoder.recognition import *
-    class LearnedFeatureExtractor(RecurrentFeatureExtractor):
+    class LearnedFeatureExtractor(TransformerFeatureExtractor):
         special = 'string'
 
         def tokenize(self, examples):
