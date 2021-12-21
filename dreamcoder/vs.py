@@ -1,3 +1,6 @@
+'''
+    Best auto refactoring algorithm.
+'''
 from dreamcoder.grammar import *
 
 epsilon = 0.001
