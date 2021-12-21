@@ -821,7 +821,6 @@ class RecognitionModel(nn.Module):
             
             ll = self.grammarBuilder.batchedLogLikelihoods(features, [entry.program]).view(-1)
             return -ll, al
-            
 
     def frontierBiasOptimal(self, frontier, auxiliary=False, vectorized=True):
         if not vectorized:
@@ -1362,14 +1361,6 @@ class RecurrentFeatureExtractor(nn.Module):
                 if len(ys) == len(xss):
                     return Task("Helmholtz", tp, list(zip(xss, ys)))
             return None
-
-
-class TransformerFeatureExtractor(RecurrentFeatureExtractor):
-    def __init__(self, *args, **kwargs):
-        super().__init__(self, *args, **kwargs)
-        self.model = t5_encoder()
-        self.H = self.model.config.d_model
-        self.bidirectional = False # TODO unsure
 
 
 class LowRank(nn.Module):
